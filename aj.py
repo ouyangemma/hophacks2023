@@ -164,11 +164,14 @@ else:
 #Initialize oxidation rate
 oxidation_rate = int(input("Please input oxidation rate: "))
 
-if 95 <= oxidation_rate < 100:
+if 98 <= oxidation_rate < 100:
     print("Oxidation rate is normal")
+elif 95 <= oxidation_rate < 98:
+    print("Oxidation rate is a little low")
+    severity_level+= 1
 elif 90 <= oxidation_rate < 95:
     print("Oxidation rate is low")
-    severity_level+= 1
+    severity_level+= 2
 elif 80<= oxidation_rate < 90:
     print("Oxidation rate is extra low")
     severity_level+= 3
@@ -178,3 +181,17 @@ elif oxidation_rate < 80:
 else: 
     print("Please manually check oxidation rate")
 
+
+#Initalize cholesterol levels
+total_cholesterol = int(input("Please input the cholesterol level: "))
+
+if total_cholesterol <= 200 and total_cholesterol >120:
+    print("Cholesterol level is normal")
+elif 200 < total_cholesterol <= 239:
+    print("Cholesterol is elevated")
+    severity_level+= 2
+elif total_cholesterol >= 240:
+    print("CHOLESTEROL IS SEVERELY ELEVATED AND DANGEROUS")
+    severity_level+= 5
+else: 
+    print("Patient cholesterol may be severely off, please manually check")

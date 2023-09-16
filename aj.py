@@ -157,6 +157,24 @@ elif 99< body_temp <= 101:
 elif body_temp > 101:
     print("PATIENT EXPERIENCING HIGH GRADE FEVER")
     severity_level+= 5
+else:
+    print("Please manually check body temp again")
 
 
+#Initialize oxidation rate
+oxidation_rate = int(input("Please input oxidation rate: "))
+
+if 95 <= oxidation_rate < 100:
+    print("Oxidation rate is normal")
+elif 90 <= oxidation_rate < 95:
+    print("Oxidation rate is low")
+    severity_level+= 1
+elif 80<= oxidation_rate < 90:
+    print("Oxidation rate is extra low")
+    severity_level+= 3
+elif oxidation_rate < 80:
+    print("OXIDATION RATE IS EXTREMELY LOW: HYPOXIA RISK")
+    severity_level+=5 
+else: 
+    print("Please manually check oxidation rate")
 

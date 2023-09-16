@@ -29,7 +29,7 @@ Baseline Numerical Values for Tests:
 Heart Rate: 60-120 bpm-done
 Diastolic BP:-done
 Systolic Blood Pressure:-done
-Respiratory Rate:
+Respiratory Rate:-done
 Body Temperature:
 Oxidation Rate:
 Cholesterol Level:
@@ -136,7 +136,27 @@ elif patient_age > 18 and resp_rate < 16:
 elif patient_age > 18 and resp_rate > 20:
     print("Adult respiratory rate is high")
     severity_level+=5
+else:
+    print("Please manually check respiratory rate")
 
+
+#Initialize body temperature values
+body_temp = int(input("Please input the patient's body temperature: "))
+
+if 97 < body_temp < 99:
+    print("Patient body temperature is normal")
+elif 95 < body_temp < 97:
+    print("Body temperature is low")
+    severity_level+= 1
+elif body_temp < 95:
+   print("PATIENT EXPERIENCING HYPOTHERMIA!!!")
+   severity_level+= 5
+elif 99< body_temp <= 101:
+    print("Body temperature is high")
+    severity_level+= 1
+elif body_temp > 101:
+    print("PATIENT EXPERIENCING HIGH GRADE FEVER")
+    severity_level+= 5
 
 
 

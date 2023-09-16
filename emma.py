@@ -26,7 +26,22 @@ def openPatientWindow():
     # Toplevel object will be treated as a new window
     newWindow = Toplevel(window)
     newWindow.title("Patient Profile")
-    newWindow.geometry("500x400")
+    newWindow.geometry("600x300")
+
+    # Create labels and entry widgets for patient data
+    labels = ["Patient ID", "Age", "Timestamp", "Heart Rate", "Systolic BP", "Diastolic BP", "Resp. Rate", "Body Temp", "Oxygen Saturation"]
+    rectangles = []
+
+    for label_text in labels:
+        label = ttk.Label(newWindow, text=label_text)
+        label.grid(row=len(rectangles), column=0, padx=10, pady=5, sticky="w")
+        
+        # Create a white rectangle (Canvas)
+        rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
+        rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
+        
+        rectangles.append(rectangle)
+
 
 
 # "view patient" button

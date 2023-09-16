@@ -140,13 +140,13 @@ def calculate_severity(Patient_age,Heart_Rate,Blood_Pressure_Systolic,Blood_Pres
     #Initialize oxidation rate
     oxidation_rate = Oxygen_Saturation
 
-    if 95 <= oxidation_rate < 98:
+    if oxidation_rate <= 95 and oxidation_rate < 98:
         # print("Oxidation rate is a little low")
         severity_level+= 1
-    elif 90 <= oxidation_rate < 95:
+    elif oxidation_rate <= 90 and oxidation_rate < 95:
         # print("Oxidation rate is low")
         severity_level+= 2
-    elif 80<= oxidation_rate < 90:
+    elif oxidation_rate <= 80 and oxidation_rate < 90:
         # print("Oxidation rate is extra low")
         severity_level+= 3
     elif oxidation_rate < 80:

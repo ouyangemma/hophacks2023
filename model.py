@@ -5,7 +5,7 @@ import os
 from sklearn.tree import DecisionTreeClassifier
 # from sklearn.metrics import classification_report
 import pickle
-from aj import calculate_severity
+from severity_score import calculate_severity
 
 # creating training data
 

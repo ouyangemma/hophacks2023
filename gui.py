@@ -32,25 +32,23 @@ def openPatientWindow(information_array):
 
     # Create labels and entry widgets for patient data
     labels = ["Patient ID", "Age", "Timestamp", "Heart Rate", "Systolic BP", "Diastolic BP", "Resp. Rate", "Body Temp", "Oxygen Saturation"]
-    rectangles = []
+    # rectangles = []
 
-    i = 0
-    for label_text in labels:
+    for i, label_text in labels:
         label = ttk.Label(newWindow, text=label_text)
-        label.grid(row=len(rectangles), column=0, padx=10, pady=5, sticky="w")
+        label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
         
         # Create a white rectangle (Canvas)
         # rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
         # rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
         #text = rectangle.create_text(row=len(rectangles), text="hi", fill="white", font=("Helvetica", 16))
 
-        print(information_array[i])
         data = ttk.Label(newWindow, text= information_array[i])
-        label.grid(row=len(rectangles), column=1, padx=10, pady=5, sticky="w")
-        
-        rectangles.append(information_array[i])
-        i+=1
+        data.grid(row=i, column=1, padx=10, pady=5, sticky="w")
 
+        rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
+        rectangle.grid(row=i, column=2, padx=10, pady=5)
+        
 def useModel():
     # Get the current directory of the script
     relative_path = os.path.dirname(__file__)

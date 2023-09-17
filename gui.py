@@ -25,7 +25,7 @@ def createCanvas():
 # function to display more information
 def openPatientWindow(information_array):
     # Toplevel object will be treated as a new window
-    print(information_array)
+    information_array = information_array.astype(str)
     newWindow = Toplevel(window)
     newWindow.title("Patient Profile")
     newWindow.geometry("600x300")
@@ -40,14 +40,15 @@ def openPatientWindow(information_array):
         label.grid(row=len(rectangles), column=0, padx=10, pady=5, sticky="w")
         
         # Create a white rectangle (Canvas)
-        rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
-        rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
+        # rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
+        # rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
         #text = rectangle.create_text(row=len(rectangles), text="hi", fill="white", font=("Helvetica", 16))
 
-        data = ttk.Label(newWindow, text=information_array[i])
+        print(information_array[i])
+        data = ttk.Label(newWindow, text= information_array[i])
         label.grid(row=len(rectangles), column=1, padx=10, pady=5, sticky="w")
         
-        rectangles.append(rectangle)
+        rectangles.append(information_array[i])
         i+=1
 
 def useModel():
@@ -98,7 +99,7 @@ if __name__ == "__main__":
             window.mainloop()
 
 
-        time.sleep(0.5)
+        time.sleep(0.2)
         
 
 

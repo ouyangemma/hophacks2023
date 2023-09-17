@@ -56,17 +56,17 @@ def useModel():
 
 if __name__ == "__main__":
 
-    # # creating the main application window
-    # window = Tk()
-    # window.title("PATIENT ALERT")
-    # window.geometry("500x400")
-
-    # createCanvas()
-
-    # # "view patient" button
-    # patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow)
-    # patient_button.place(x = 150, y = 250)
-
-    # window.mainloop()
-
     useModel()
+    # creating the main application window
+    window = Tk()
+    window.title("PATIENT ALERT")
+    window.geometry("500x400")
+
+    createCanvas()
+
+    # "view patient" button
+    patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow)
+    patient_button.place(x = 150, y = 250)
+
+    window.mainloop()
+

@@ -43,6 +43,9 @@ def openPatientWindow(information_array):
         rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
         rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
         #text = rectangle.create_text(row=len(rectangles), text="hi", fill="white", font=("Helvetica", 16))
+
+        data = ttk.Label(newWindow, text=information_array[i])
+        label.grid(row=len(rectangles), column=1, padx=10, pady=5, sticky="w")
         
         rectangles.append(rectangle)
         i+=1

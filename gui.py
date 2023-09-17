@@ -4,6 +4,10 @@ import pandas as pd
 import pickle
 import os
 import sklearn
+import time
+import string
+import csv
+import numpy as np
 
 def createCanvas():
     # creating a frame for the main label
@@ -19,7 +23,7 @@ def createCanvas():
 
 
 # function to display more information
-def openPatientWindow():
+def openPatientWindow(information_array):
     # Toplevel object will be treated as a new window
     newWindow = Toplevel(window)
     newWindow.title("Patient Profile")
@@ -36,6 +40,7 @@ def openPatientWindow():
         # Create a white rectangle (Canvas)
         rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
         rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
+        text = rectangle.create_text(row=len(rectangles), text=information_array[i], fill="white", font=("Helvetica", 16))
         
         rectangles.append(rectangle)
 
@@ -52,21 +57,41 @@ def useModel():
     prediction = model.predict(dataframe)
     print(prediction)
 
+    return prediction
+
     # make model predict severity score
 
 if __name__ == "__main__":
 
-    useModel()
-    # creating the main application window
-    window = Tk()
-    window.title("PATIENT ALERT")
-    window.geometry("500x400")
+    data_array = useModel()
+    for i in range(data_array):
+        if data_array(i) > 8:
 
-    createCanvas()
+            # Get the current directory of the script
+            relative_path = os.path.dirname(__file__)
 
-    # "view patient" button
-    patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow)
-    patient_button.place(x = 150, y = 250)
+            # read csv file
+            X_train = pd.read_csv(os.path.join(relative_path, 'testing_data.csv'))
 
-    window.mainloop()
+            # take data from ith row and input into openPatientWindow(needs inputs)
+            Y_train_np = np.zeros((X_train.shape[0], 1))
+            Y_train_np[i, 0] = string(X_train.iloc[i,0]), string(X_train.iloc[i,1]), string(X_train.iloc[i,2]), string(X_train.iloc[i,3]), string(X_train.iloc[i,4]), string(X_train.iloc[i,5]), string(X_train.iloc[i,6]), string(X_train.iloc[i,7]), string(X_train.iloc[i,8]) 
+
+            # creating the main application window
+            window = Tk()
+            window.title("PATIENT ALERT")
+            window.geometry("500x400")
+
+            createCanvas()
+
+            # "view patient" button
+            patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow(Y_train_np[i,0]))
+            patient_button.place(x = 150, y = 250)
+
+            window.mainloop()
+
+
+        time.sleep(1)
+        
+
 

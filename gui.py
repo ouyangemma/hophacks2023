@@ -25,7 +25,6 @@ def createCanvas():
 # function to display more information
 def openPatientWindow(information_array):
     # Toplevel object will be treated as a new window
-    information_array = information_array.astype(str)
     newWindow = Toplevel(window)
     newWindow.title("Patient Profile")
     newWindow.geometry("600x300")
@@ -34,7 +33,8 @@ def openPatientWindow(information_array):
     labels = ["Patient ID", "Age", "Timestamp", "Heart Rate", "Systolic BP", "Diastolic BP", "Resp. Rate", "Body Temp", "Oxygen Saturation"]
     # rectangles = []
 
-    for i, label_text in labels:
+    i = 0
+    for label_text in labels:
         label = ttk.Label(newWindow, text=label_text)
         label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
         
@@ -43,11 +43,13 @@ def openPatientWindow(information_array):
         # rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
         #text = rectangle.create_text(row=len(rectangles), text="hi", fill="white", font=("Helvetica", 16))
 
-        data = ttk.Label(newWindow, text= information_array[i])
-        data.grid(row=i, column=1, padx=10, pady=5, sticky="w")
-
         rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
-        rectangle.grid(row=i, column=2, padx=10, pady=5)
+        rectangle.grid(row=i, column=1, padx=10, pady=5)
+
+        data = Label(newWindow, text= information_array[i])
+        data.config(bg = "white", fg = "black")
+        data.grid(row=i, column=1, padx=10, pady=5, sticky="w")
+        i +=1
         
 def useModel():
     # Get the current directory of the script
@@ -60,7 +62,6 @@ def useModel():
     dataframe = dataframe.iloc[:, dataframe.columns != 'Timestamp']
     dataframe = dataframe.iloc[:, dataframe.columns != 'Patient_ID']
     prediction = model.predict(dataframe)
-    print(prediction)
 
     return prediction
 
@@ -91,7 +92,7 @@ if __name__ == "__main__":
             createCanvas()
 
             # "view patient" button
-            patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow(Y_train_np))
+            patient_button = ttk.Button(window, text = "View Patient Information", command = lambda: openPatientWindow(Y_train_np))
             patient_button.place(x = 150, y = 250)
 
             window.mainloop()

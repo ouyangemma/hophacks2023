@@ -1,13 +1,19 @@
 # decision tree
 import numpy as np
 import pandas as pd
+import os
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import classification_report
+# from sklearn.metrics import classification_report
 import pickle
 from aj import calculate_severity
 
 # creating training data
-X_train = pd.read_csv('/Users/hyewon/Desktop/Hophacks/hophacks2023/patient_data_mixed.csv')
+
+# Get the current directory of the script
+relative_path = os.path.dirname(__file__)
+
+# Read the CSV file using the relative path
+X_train = pd.read_csv(os.path.join(relative_path, 'patient_data_mixed.csv'))
 # print(X_train.head())
 
 X_train = X_train.iloc[:, X_train.columns != 'Timestamp']

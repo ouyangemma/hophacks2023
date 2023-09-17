@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import pandas as pd
 import pickle
+import os
 
 def createCanvas():
     # creating a frame for the main label
@@ -38,8 +39,12 @@ def openPatientWindow():
         rectangles.append(rectangle)
 
 def useModel():
-    dataframe = pd.read_csv('/Users/emma/Documents/JHU/Sophomore/hophacks/hophacks2023/testing_data.csv')
-    model = pickle.load(open('hophacks2023/decision_tree_model.sav', 'rb'))
+    # Get the current directory of the script
+    relative_path = os.path.dirname(__file__)
+
+    # Read the CSV file using the relative path
+    dataframe = pd.read_csv(os.path.join(relative_path, 'testing_data.csv'))
+    model = pickle.load(open(os.path.join(relative_path, 'decision_tree_model.csv'), 'rb'))
 
     dataframe = dataframe.iloc[:, dataframe.columns != 'Timestamp']
     dataframe = dataframe.iloc[:, dataframe.columns != 'Patient_ID']

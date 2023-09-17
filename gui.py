@@ -25,6 +25,7 @@ def createCanvas():
 # function to display more information
 def openPatientWindow(information_array):
     # Toplevel object will be treated as a new window
+    print(information_array)
     newWindow = Toplevel(window)
     newWindow.title("Patient Profile")
     newWindow.geometry("600x300")
@@ -33,6 +34,7 @@ def openPatientWindow(information_array):
     labels = ["Patient ID", "Age", "Timestamp", "Heart Rate", "Systolic BP", "Diastolic BP", "Resp. Rate", "Body Temp", "Oxygen Saturation"]
     rectangles = []
 
+    i = 0
     for label_text in labels:
         label = ttk.Label(newWindow, text=label_text)
         label.grid(row=len(rectangles), column=0, padx=10, pady=5, sticky="w")
@@ -40,9 +42,10 @@ def openPatientWindow(information_array):
         # Create a white rectangle (Canvas)
         rectangle = Canvas(newWindow, bg="white", width=150, height=20, highlightthickness=0)
         rectangle.grid(row=len(rectangles), column=1, padx=10, pady=5)
-        text = rectangle.create_text(row=len(rectangles), text=information_array[i], fill="white", font=("Helvetica", 16))
+        #text = rectangle.create_text(row=len(rectangles), text="hi", fill="white", font=("Helvetica", 16))
         
         rectangles.append(rectangle)
+        i+=1
 
 def useModel():
     # Get the current directory of the script
@@ -64,8 +67,8 @@ def useModel():
 if __name__ == "__main__":
 
     data_array = useModel()
-    for i in range(data_array):
-        if data_array(i) > 8:
+    for i in range(data_array.shape[0]):
+        if data_array[i] > 8:
 
             # Get the current directory of the script
             relative_path = os.path.dirname(__file__)
@@ -74,8 +77,9 @@ if __name__ == "__main__":
             X_train = pd.read_csv(os.path.join(relative_path, 'testing_data.csv'))
 
             # take data from ith row and input into openPatientWindow(needs inputs)
-            Y_train_np = np.zeros((X_train.shape[0], 1))
-            Y_train_np[i, 0] = string(X_train.iloc[i,0]), string(X_train.iloc[i,1]), string(X_train.iloc[i,2]), string(X_train.iloc[i,3]), string(X_train.iloc[i,4]), string(X_train.iloc[i,5]), string(X_train.iloc[i,6]), string(X_train.iloc[i,7]), string(X_train.iloc[i,8]) 
+            # Y_train_np = np.zeros((X_train.shape[0], 1))
+            # Y_train_np[i, 0] = string(X_train.iloc[i,0]), string(X_train.iloc[i,1]), string(X_train.iloc[i,2]), string(X_train.iloc[i,3]), string(X_train.iloc[i,4]), string(X_train.iloc[i,5]), string(X_train.iloc[i,6]), string(X_train.iloc[i,7]), string(X_train.iloc[i,8]) 
+            Y_train_np = X_train.iloc[i,0], X_train.iloc[i,1], X_train.iloc[i,2], X_train.iloc[i,3], X_train.iloc[i,4], X_train.iloc[i,5], X_train.iloc[i,6], X_train.iloc[i,7], X_train.iloc[i,8]
 
             # creating the main application window
             window = Tk()
@@ -85,13 +89,13 @@ if __name__ == "__main__":
             createCanvas()
 
             # "view patient" button
-            patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow(Y_train_np[i,0]))
+            patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow(Y_train_np))
             patient_button.place(x = 150, y = 250)
 
             window.mainloop()
 
 
-        time.sleep(1)
+        time.sleep(0.5)
         
 
 

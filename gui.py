@@ -3,6 +3,7 @@ from tkinter import ttk
 import pandas as pd
 import pickle
 import os
+import sklearn
 
 def createCanvas():
     # creating a frame for the main label
@@ -44,7 +45,7 @@ def useModel():
 
     # Read the CSV file using the relative path
     dataframe = pd.read_csv(os.path.join(relative_path, 'testing_data.csv'))
-    model = pickle.load(open(os.path.join(relative_path, 'decision_tree_model.csv'), 'rb'))
+    model = pickle.load(open(os.path.join(relative_path, 'decision_tree_model.sav'), 'rb'))
 
     dataframe = dataframe.iloc[:, dataframe.columns != 'Timestamp']
     dataframe = dataframe.iloc[:, dataframe.columns != 'Patient_ID']

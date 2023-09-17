@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import ttk
+import pandas as pd
+import pickle
 
 def createCanvas():
     # creating a frame for the main label
@@ -35,18 +37,30 @@ def openPatientWindow():
         
         rectangles.append(rectangle)
 
+def useModel():
+    dataframe = pd.read_csv('/Users/emma/Documents/JHU/Sophomore/hophacks/hophacks2023/testing_data.csv')
+    model = pickle.load(open('hophacks2023/decision_tree_model.sav', 'rb'))
+
+    dataframe = dataframe.iloc[:, dataframe.columns != 'Timestamp']
+    dataframe = dataframe.iloc[:, dataframe.columns != 'Patient_ID']
+    prediction = model.predict(dataframe)
+    print(prediction)
+
+    # make model predict severity score
+
 if __name__ == "__main__":
 
-    # creating the main application window
-    window = Tk()
-    window.title("PATIENT ALERT")
-    window.geometry("500x400")
+    # # creating the main application window
+    # window = Tk()
+    # window.title("PATIENT ALERT")
+    # window.geometry("500x400")
 
-    createCanvas()
+    # createCanvas()
 
-    # "view patient" button
-    patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow)
-    patient_button.place(x = 150, y = 250)
+    # # "view patient" button
+    # patient_button = ttk.Button(window, text = "View Patient Information", command = openPatientWindow)
+    # patient_button.place(x = 150, y = 250)
 
+    # window.mainloop()
 
-    window.mainloop()
+    useModel()
